@@ -10,7 +10,13 @@ describe("GET /api/users", () => {
         expect(res.status).toBe(200);
       });
   });
-  it.todo("returns a list of all users");
+  it("returns a list of all users", () => {
+    return request(server)
+      .get("/api/users")
+      .then((res) => {
+        expect(res.body.length).toBe(4);
+      });
+  });
 });
 
 describe("GET /api/users/:id", () => {
