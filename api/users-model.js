@@ -18,4 +18,6 @@ function getAll() {
   return db("users");
 }
 
-function findById(id) {}
+function findById(id) {
+  return db("users").where({ id }).first();
+}

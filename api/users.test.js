@@ -20,8 +20,20 @@ describe("GET /api/users", () => {
 });
 
 describe("GET /api/users/:id", () => {
-  it.todo("returns 200");
-  it.todo("returns the user with the specified ID");
+  it("returns 200", () => {
+    return request(server)
+      .get("/api/users/1")
+      .then((res) => {
+        expect(res.status).toBe(200);
+      });
+  });
+  it("returns the user with the specified ID", () => {
+    return request(server)
+      .get("/api/users/1")
+      .then((res) => {
+        expect(res.body.name).toBe("Alice");
+      });
+  });
 });
 
 describe("POST /api/users", () => {
