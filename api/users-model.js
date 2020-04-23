@@ -16,7 +16,9 @@ function insert(user) {
 
 function update(id, changes) {}
 
-function remove(id) {}
+function remove(id) {
+  return db("users").where({ id }).del();
+}
 
 function getAll() {
   return db("users");

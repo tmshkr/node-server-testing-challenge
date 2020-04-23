@@ -15,4 +15,9 @@ router.post("/", (req, res) => {
   Users.insert({ name }).then((id) => res.status(201).json(id));
 });
 
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  Users.remove(id).then(() => res.status(204).send());
+});
+
 module.exports = router;

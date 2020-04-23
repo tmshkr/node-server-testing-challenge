@@ -61,6 +61,15 @@ describe("POST /api/users", () => {
 });
 
 describe("DELETE /api/users/:id", () => {
-  it.todo("returns 204");
-  it.todo("deletes the user with the specified ID");
+  it("returns 204", () => {
+    return request(server)
+      .delete("/api/users/1")
+      .then((res) => {
+        expect(res.status).toBe(204);
+      });
+  });
+  it("deletes the user with the specified ID", async () => {
+    const user = await db("users").where({ id: 1 });
+    expect(user.length).toBe(0);
+  });
 });
