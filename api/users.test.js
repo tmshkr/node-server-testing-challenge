@@ -2,6 +2,8 @@ const request = require("supertest");
 const server = require("../server.js");
 const db = require("../data/db-config.js");
 
+beforeAll(() => db.seed.run());
+
 describe("GET /api/users", () => {
   it("returns 200", () => {
     return request(server)
@@ -37,7 +39,6 @@ describe("GET /api/users/:id", () => {
 });
 
 describe("POST /api/users", () => {
-  afterEach(async () => await db("users").where({ name: "Erin" }).del());
   it("returns 201", () => {
     return request(server)
       .post("/api/users")
