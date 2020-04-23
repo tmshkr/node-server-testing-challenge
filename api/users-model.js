@@ -8,7 +8,11 @@ module.exports = {
   findById,
 };
 
-function insert(user) {}
+function insert(user) {
+  return db("users")
+    .insert(user, "id")
+    .then(([id]) => id);
+}
 
 function update(id, changes) {}
 

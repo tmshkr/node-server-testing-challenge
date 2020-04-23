@@ -10,4 +10,9 @@ router.get("/:id", (req, res) => {
   Users.findById(id).then((user) => res.json(user));
 });
 
+router.post("/", (req, res) => {
+  const { name } = req.body;
+  Users.insert({ name }).then((id) => res.status(201).json(id));
+});
+
 module.exports = router;

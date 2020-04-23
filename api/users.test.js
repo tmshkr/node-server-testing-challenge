@@ -37,9 +37,27 @@ describe("GET /api/users/:id", () => {
 });
 
 describe("POST /api/users", () => {
-  it.todo("returns 201");
-  it.todo("creates a new user in the database");
-  it.todo("returns the new user to the client");
+  afterEach(async () => await db("users").where({ name: "Erin" }).del());
+  it("returns 201", () => {
+    return request(server)
+      .post("/api/users")
+      .send({ name: "Erin" })
+      .then((res) => {
+        expect(res.status).toBe(201);
+      });
+  });
+  it("returns the new user ID to the client", async () => {
+    const res = await request(server).post("/api/users").send({ name: "Erin" });
+    const id = res.body;
+    expect(typeof id).toBe("number");
+  });
+
+  it("creates a new user in the database", async () => {
+    const res = await request(server).post("/api/users").send({ name: "Erin" });
+    const id = res.body;
+    const newUser = await db("users").where({ id }).first();
+    expect(newUser.name).toBe("Erin");
+  });
 });
 
 describe("DELETE /api/users/:id", () => {
